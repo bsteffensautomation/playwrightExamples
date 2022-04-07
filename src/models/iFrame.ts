@@ -16,7 +16,7 @@ export class iFrame {
   /**
    * Create a context for iFrame and set on the object
    * @param element element that represents an iframe
-   * @returns iFrameLocator for use in further methods
+   * @returns iFrameLocator for use in further method
    */
   async createFrame(element = "#example") {
     this.iFrameLocator = await this.page.frameLocator(element);
