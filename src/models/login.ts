@@ -29,9 +29,8 @@ export class LoginPage {
     // enter password
     await this.passwordInputLocator.fill(password);
 
-    // pulled from documentation
-    //playwright.dev/docs/navigations#multiple-navigations
-    // make sure login is successful by assuring we land on /secure route
+    // pulled from documentation playwright.dev/docs/navigations#multiple-navigations
+    // make sure login is successful by assuring we land on /secure route AFTER navigation
     // Note that Promise.all prevents a race condition
     // between clicking and waiting for a navigation.
     await Promise.all([

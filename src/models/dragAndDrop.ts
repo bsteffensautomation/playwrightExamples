@@ -1,10 +1,14 @@
-import { Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class DragAndDropPage {
   readonly page: Page;
+  readonly sourceElementLocator: Locator;
+  readonly destinationElementLocator: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.sourceElementLocator = page.locator("id=column-a");
+    this.destinationElementLocator = page.locator("id=column-b");
   }
 
   // goto baseUrl/drag_and_drop
@@ -14,17 +18,11 @@ export class DragAndDropPage {
 
   /**
    * Drag an Element to a desintation
-   * In a real world example the source and destinatino would be parameters
+   * In a real world example the source and destination would be parameters
    * of this function
    */
   async dragAndDrop() {
-    // create username locator
-    const sourceElementLocator = await this.page.locator("id=column-a");
-
-    // create password locator
-    const destinationLocator = await this.page.locator("id=column-b");
-
     // perform drag operation
-    await sourceElementLocator.dragTo(destinationLocator);
+    await this.sourceElementLocator.dragTo(this.destinationElementLocator);
   }
 }
