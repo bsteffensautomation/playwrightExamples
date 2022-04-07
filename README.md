@@ -1,4 +1,6 @@
-# playwrightExamples
+# playwright Examples
+
+**NOTE: All conventions and patterns here are taken from documentation and will be updated alongside future playwright releases**
 
 # Quick Start
 
