@@ -1,7 +1,7 @@
 import { PlaywrightTestConfig } from "@playwright/test";
 const config: PlaywrightTestConfig = {
   // globalSetup: require.resolve("./src/globalSetup/global-setup"),
-  timeout: 100000,
+  timeout: 20000,
   retries: 2,
   use: {
     baseURL: "https://the-internet.herokuapp.com",
