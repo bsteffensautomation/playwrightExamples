@@ -17,19 +17,34 @@ export class LoginPage {
    */
   async login(username, password) {
     await this.goto();
-    // create username locators
-    const userNameLocator = await this.page.locator(".username");
+
+    // create username locator
+    const userNameLocator = await this.page.locator("id=username");
+
     // create password locator
-    const passwordLocator = await this.page.locator("password");
-    await this.page.fill("elements.password", password);
-    console.log("---- entered password ---- ");
+    const passwordLocator = await this.page.locator("id=password");
 
-    await Promise.all([
-      this.page.waitForNavigation(), // The promise resolves after navigation has finished
-      this.page.click(""), // Clicking the link will indirectly cause a navigation
-      console.log("---- clicked submit ---- "),
+    // create submit button locator
+    const submitLocator = await this.page.locator("button:has-text('Login')");
+
+    // enter username
+    await userNameLocator.fill(username);
+
+    // enter password
+    await passwordLocator.fill(password);
+
+    // pulled from documentation
+    //playwright.dev/docs/navigations#multiple-navigations
+
+    // Note that Promise.all prevents a race condition
+    // between clicking and waiting for a navigation.
+    https: await Promise.all([
+      // It is important to call waitForNavigation before click to set up waiting.
+      this.page.waitForNavigation({ url: "**/secure" }),
+      // Triggers a navigation with a script redirect.
+      submitLocator.click(),
     ]);
-
+    // wait for requests to resolve
     await this.page.waitForLoadState("networkidle");
   }
 }

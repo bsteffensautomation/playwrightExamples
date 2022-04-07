@@ -4,12 +4,12 @@ const config: PlaywrightTestConfig = {
   timeout: 100000,
   retries: 2,
   use: {
-    baseURL: "https://the-internet.herokuapp.com/",
+    baseURL: "https://the-internet.herokuapp.com",
     headless: true,
     ignoreHTTPSErrors: true,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
-    storageState: "state.json",
+    //storageState: "state.json",
   },
 };
 export default config;
