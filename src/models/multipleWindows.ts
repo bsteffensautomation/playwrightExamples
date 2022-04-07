@@ -29,6 +29,7 @@ export class MultipleWindows {
     // set reference to new page on the class
     // so it can be reused in other methods
     this.myNewPage = newPage;
+
     // wait for new page's network requests to resolve
     await this.myNewPage.waitForLoadState("networkidle");
   }

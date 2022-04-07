@@ -1,10 +1,16 @@
-import { Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class LoginPage {
   readonly page: Page;
+  readonly userNameInputLocator: Locator;
+  readonly passwordInputLocator: Locator;
+  readonly submitButtonLocator: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.userNameInputLocator = page.locator("id=username");
+    this.passwordInputLocator = page.locator("id=password");
+    this.submitButtonLocator = page.locator("button:has-text('Login')");
   }
 
   // goto baseUrl/login
@@ -17,32 +23,22 @@ export class LoginPage {
    */
   async login(username, password) {
     await this.goto();
-
-    // create username locator
-    const userNameLocator = await this.page.locator("id=username");
-
-    // create password locator
-    const passwordLocator = await this.page.locator("id=password");
-
-    // create submit button locator
-    const submitLocator = await this.page.locator("button:has-text('Login')");
-
     // enter username
-    await userNameLocator.fill(username);
+    await this.userNameInputLocator.fill(username);
 
     // enter password
-    await passwordLocator.fill(password);
+    await this.passwordInputLocator.fill(password);
 
     // pulled from documentation
     //playwright.dev/docs/navigations#multiple-navigations
-
+    // make sure login is successful by assuring we land on /secure route
     // Note that Promise.all prevents a race condition
     // between clicking and waiting for a navigation.
-    https: await Promise.all([
+    await Promise.all([
       // It is important to call waitForNavigation before click to set up waiting.
       this.page.waitForNavigation({ url: "**/secure" }),
       // Triggers a navigation with a script redirect.
-      submitLocator.click(),
+      this.submitButtonLocator.click(),
     ]);
     // wait for requests to resolve
     await this.page.waitForLoadState("networkidle");
