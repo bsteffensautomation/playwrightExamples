@@ -20,9 +20,17 @@
 
 ---
 
+# Bin Commands
+
+Run these from the root of the project. Provided as examples of useful CLI args
+
+`./bin/allBrowsers.sh`
+
+---
+
 ## About
 
-Playwright Test is a JavaScript based, fully featured automation framework created by the Developer Division at Microsoft. Playwright Test was built specifically to accommodate the needs of the end-to-end testing. It does everything you would expect from a regular test runner, and more.
+Playwright Test is a TypeScript based, fully featured automation framework created by the Developer Division at Microsoft. Playwright Test was built specifically to accommodate the needs of the end-to-end testing. It does everything you would expect from a regular test runner, and more.
 
 ---
 
@@ -35,6 +43,7 @@ Playwright Test is a JavaScript based, fully featured automation framework creat
 ## File Structure
 
     .
+    ├── bin                     # Example CLI commands
     ├── node_modules            # Dependencies
     ├── src                     # Project
     │   ├── fixtures            # Test setup and dependency logic.
